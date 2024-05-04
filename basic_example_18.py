@@ -19,10 +19,18 @@ async def random_operation():
 
 async def main():
     task = asyncio.create_task(random_operation())
+    # let the task get cancelled
     try:
         result = await asyncio.wait_for(task, timeout=2)
     except asyncio.exceptions.TimeoutError:
         logger.info("timed out")
+
+    task = asyncio.create_task(random_operation())
+    try:
+        result = await asyncio.wait_for(asyncio.shield(task), timeout=2)
+    except asyncio.exceptions.TimeoutError:
+        logger.info("taking very long, lets wait anyway")
+        await task
 
 
 if __name__ == "__main__":
