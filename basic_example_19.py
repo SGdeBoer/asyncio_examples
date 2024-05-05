@@ -15,16 +15,15 @@ logger.setLevel("INFO")
 
 
 def time_await(func: Callable) -> Callable:
-    @functools.wraps(func)
     async def wrapped(*args, **kwargs) -> Any:
-        logger.info(f"running {func} with args {args} {kwargs}")
+        logger.info(f"running {func.__name__} with args {args} {kwargs}")
         start = timeit.default_timer()
         try:
             return await func(*args, **kwargs)
         finally:
             end = timeit.default_timer()
             total = end - start
-            logger.info(f"finished {func} in {total}s")
+            logger.info(f"finished {func.__name__} in {total}s")
     return wrapped
 
 
