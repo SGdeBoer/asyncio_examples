@@ -3,9 +3,7 @@ Example showcasing why using run_until_complete to avoid marking functions as as
 """
 
 import asyncio
-import timeit
 import logging
-from typing import Callable, Any
 
 FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(format=FORMAT)
