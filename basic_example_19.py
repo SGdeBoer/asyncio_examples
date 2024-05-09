@@ -5,7 +5,6 @@ Example of a function decorator that allows for profiling/timing coroutines
 import asyncio
 import timeit
 import logging
-import functools
 from typing import Callable, Any
 
 FORMAT = '%(asctime)s %(message)s'
