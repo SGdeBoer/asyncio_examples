@@ -1,5 +1,5 @@
 """
-Example showcasing why using run_until_complete to avoid marking functions as async is not good practice
+Example showcasing a simple as_completed use case, where you can handle results as soon as they're done rather than in the order they were scheduled
 """
 
 import asyncio
