@@ -3,6 +3,7 @@ Example showcasing why using run_until_complete to avoid marking functions as as
 """
 
 import asyncio
+import time
 import logging
 
 FORMAT = '%(asctime)s %(message)s'
@@ -13,7 +14,7 @@ logger.setLevel("INFO")
 
 async def heavy_task():
     logger.info("heavy task running")
-    await asyncio.sleep(10)
+    time.sleep(10)
 
 
 async def light_task():
