@@ -35,11 +35,12 @@ async def amain():
     loop = asyncio.get_event_loop()
     futures: list[Future] = []
 
-    with ProcessPoolExecutor() as executor:
-        for coro in asyncio.as_completed(coros):
-            result = await coro
-            logger.info(f"ready to handle result of coro that slept for {result}")
-            futures.append(loop.run_in_executor(executor, blocking_call))
+    executor = ProcessPoolExecutor(5)
+
+    for coro in asyncio.as_completed(coros):
+        result = await coro
+        logger.info(f"ready to handle result of coro that slept for {result}")
+        futures.append(loop.run_in_executor(executor, blocking_call))
 
     logger.info("gathering futures")
     results = await asyncio.gather(*futures)
